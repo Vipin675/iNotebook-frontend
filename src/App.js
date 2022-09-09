@@ -7,7 +7,7 @@ import About from "./routes/about/About";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
