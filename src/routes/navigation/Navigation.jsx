@@ -1,10 +1,16 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
+import Alert from "../../components/alert/Alert.component";
 
+// Alert Context
+import { AlertContext } from "../../context/AlertContext";
+
+const handleLogOut = () => {
+  localStorage.removeItem("token");
+};
 const Navigation = () => {
+  const { alert } = useContext(AlertContext);
   const location = useLocation();
-
   useEffect(() => {}, [location]);
 
   return (
@@ -50,8 +56,36 @@ const Navigation = () => {
               </li>
             </ul>
           </div>
+          {!localStorage.getItem("token") ? (
+            <div className="">
+              <Link
+                to="/login"
+                className="btn btn-sm btn-outline-light mx-1"
+                role="button"
+              >
+                Login
+              </Link>
+              <Link
+                to="/sign-up"
+                className="btn btn-sm btn-primary mx-1"
+                role="button"
+              >
+                Sign Up
+              </Link>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="btn btn-sm btn-danger mx-1"
+              role="button"
+              onClick={handleLogOut}
+            >
+              Log out
+            </Link>
+          )}
         </div>
       </nav>
+      <Alert alert={alert} />
       <Outlet />
     </>
   );

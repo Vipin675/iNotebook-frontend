@@ -1,8 +1,13 @@
-import { createContext, useState } from "react";
+import { useContext, createContext, useState } from "react";
+
+// AlertContext --------------------------------------------------
+import { AlertContext } from "./AlertContext";
+// AlertContext --------------------------------------------------
 
 export const NotesContext = createContext();
 
 export const NotesProvider = ({ children }) => {
+  const { showAlert } = useContext(AlertContext);
   const [notes, setNotes] = useState([]);
 
   // GET ALL NOTES
@@ -10,8 +15,7 @@ export const NotesProvider = ({ children }) => {
     const options = {
       method: "GET",
       headers: {
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc1N2Y3MTUxZjM2YWRkZmE4MDgzMiIsImlhdCI6MTY2MjQ3NDI3MH0.EfMVH5RPpcnVVjfR8-Vkmp3sKIe9p8kPfM0TzfytopQ",
+        "auth-token": localStorage.getItem("token"),
       },
     };
 
@@ -30,15 +34,17 @@ export const NotesProvider = ({ children }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc1N2Y3MTUxZjM2YWRkZmE4MDgzMiIsImlhdCI6MTY2MjQ3NDI3MH0.EfMVH5RPpcnVVjfR8-Vkmp3sKIe9p8kPfM0TzfytopQ",
+        "auth-token": localStorage.getItem("token"),
       },
       body: `{"title":"${title}","description":"${description}","tag":"${tag}"}`,
     };
 
     await fetch("http://localhost:5000/api/notes/add-note", options)
       .then((response) => response.json())
-      .then((response) => console.log(response))
+      .then((response) => {
+        showAlert("success", `New note is succefully created`);
+        console.log(response);
+      })
       .catch((err) => console.error(err));
 
     getAllNotes();
@@ -49,8 +55,7 @@ export const NotesProvider = ({ children }) => {
     const options = {
       method: "DELETE",
       headers: {
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc1N2Y3MTUxZjM2YWRkZmE4MDgzMiIsImlhdCI6MTY2MjQ3NDI3MH0.EfMVH5RPpcnVVjfR8-Vkmp3sKIe9p8kPfM0TzfytopQ",
+        "auth-token": localStorage.getItem("token"),
       },
     };
 
@@ -70,8 +75,7 @@ export const NotesProvider = ({ children }) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc1N2Y3MTUxZjM2YWRkZmE4MDgzMiIsImlhdCI6MTY2MjQ3NDI3MH0.EfMVH5RPpcnVVjfR8-Vkmp3sKIe9p8kPfM0TzfytopQ",
+        "auth-token": localStorage.getItem("token"),
       },
       body: `{"title":"${title}","description":"${description}","tag":"${tag}"}`,
     };

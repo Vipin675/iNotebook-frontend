@@ -33,14 +33,14 @@ const NotesItem = ({ note }) => {
   return (
     <>
       <div
-        className={`${modal ? "modal bg-blur" : "modal"}`}
+        className={`modal ${modal ? "bg-blur" : ""} `}
         style={{ display: `${modal ? "block" : ""}` }}
         tabIndex="-1"
       >
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-header text-light bg-dark">
-              <h5 className="modal-title">Modal title</h5>
+              <h5 className="modal-title">Update {note.title} note</h5>
               <button
                 type="button"
                 className="btn-close-white"
@@ -50,7 +50,6 @@ const NotesItem = ({ note }) => {
               ></button>
             </div>
             <div className="modal-body">
-              <p>{note._id} has been clicked</p>
               <form>
                 <div className="mb-3">
                   <label htmlFor="title" className="form-label">
@@ -105,7 +104,7 @@ const NotesItem = ({ note }) => {
                     className="btn btn-primary"
                     onClick={handleSubmit}
                   >
-                    Update notes
+                    Update
                   </button>
                 </div>
               </form>
