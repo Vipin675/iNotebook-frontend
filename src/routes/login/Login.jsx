@@ -1,7 +1,16 @@
 import React, { useContext, useState } from "react";
+import { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 const Login = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  });
+
   const { loginUser } = useContext(UserContext);
   const [user, setUser] = useState({
     email: "",

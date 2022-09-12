@@ -42,7 +42,7 @@ export const NotesProvider = ({ children }) => {
     await fetch("http://localhost:5000/api/notes/add-note", options)
       .then((response) => response.json())
       .then((response) => {
-        showAlert("success", `New note is succefully created`);
+        showAlert("success", `NEW NOTE CREATED`);
         console.log(response);
       })
       .catch((err) => console.error(err));
@@ -61,7 +61,10 @@ export const NotesProvider = ({ children }) => {
 
     await fetch(`http://localhost:5000/api/notes/delete/${id}`, options)
       .then((response) => response.json())
-      .then((response) => console.log(response))
+      .then((response) => {
+        showAlert("success", `NOTE DELETED`);
+        console.log(response);
+      })
       .catch((err) => console.error(err));
 
     getAllNotes();
@@ -82,7 +85,10 @@ export const NotesProvider = ({ children }) => {
 
     await fetch(`http://localhost:5000/api/notes/update/${id}`, options)
       .then((response) => response.json())
-      .then((response) => console.log(response))
+      .then((response) => {
+        showAlert("success", `NOTE UPDATED`);
+        console.log(response);
+      })
       .catch((err) => console.error(err));
 
     getAllNotes();

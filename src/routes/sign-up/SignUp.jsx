@@ -1,7 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  });
+
   const { signUpUser } = useContext(UserContext);
   const [newUser, setnewUser] = useState({
     name: "",

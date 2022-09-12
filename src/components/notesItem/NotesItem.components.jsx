@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import "./noteItem.styles.css";
 import { NotesContext } from "../../context/NotesContext";
 
 const NotesItem = ({ note }) => {
