@@ -44,7 +44,7 @@ const Login = () => {
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
                     <form onSubmit={handleSubmit}>
-                      <div className="d-flex align-items-center mb-3 pb-1">
+                      <div className="d-flex flex-column justify-content-center align-items-center mb-3 pb-1">
                         <img
                           style={{ height: "5rem" }}
                           src="notexpress.png"

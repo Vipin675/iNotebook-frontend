@@ -25,8 +25,8 @@ const About = () => {
                       alt=""
                     />
                     <h2 className="h2">NoteXpress</h2>
+                    <h3 className="mb-3">Your Personal Note-Taking App</h3>
                   </div>
-                  <h3 className="mb-3">- Your Personal Note-Taking App -</h3>
                   <p className="mb-5">
                     NoteXpress is a powerful MERN (MongoDB, Express.js, React,
                     and Node.js) application designed to simplify the process of
