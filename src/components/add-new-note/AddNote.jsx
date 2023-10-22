@@ -25,12 +25,18 @@ const AddNote = () => {
   };
 
   return (
-    <div className="container my-3 border-end border-start">
-      <h3 className="text-center">Add New Note</h3>
+    <div
+      className="container p-2 my-3 text-dark bg-light rounded p-5"
+      style={{
+        boxShadow:
+          "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
+      }}
+    >
+      <h3 className="text-center">CREATE NOTE</h3>
       <form>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
-            Enter title
+            <h5>Enter title</h5>
           </label>
           <input
             type="text"
@@ -45,9 +51,9 @@ const AddNote = () => {
         </div>
         <div className="mb-3">
           <label htmlFor="description" className="form-label">
-            Description
+            <h5>Description</h5>
           </label>
-          <input
+          <textarea
             type="text"
             className="form-control border-success"
             required
@@ -60,7 +66,7 @@ const AddNote = () => {
         </div>
         <div className="mb-3">
           <label htmlFor="tag" className="form-label">
-            Tag
+            <h5>Tag</h5>
           </label>
           <input
             type="text"

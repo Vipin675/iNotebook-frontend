@@ -7,6 +7,8 @@ import { AlertContext } from "./AlertContext";
 export const NotesContext = createContext();
 
 export const NotesProvider = ({ children }) => {
+  const baseAPIUrl = "https://inotebookapi-9vwo.onrender.com";
+
   const { showAlert } = useContext(AlertContext);
   const [notes, setNotes] = useState([]);
 
@@ -19,7 +21,7 @@ export const NotesProvider = ({ children }) => {
       },
     };
 
-    await fetch("http://localhost:5000/api/notes/fetch-all-notes", options)
+    await fetch(`${baseAPIUrl}/api/notes/fetch-all-notes`, options)
       .then((response) => response.json())
       .then((response) => {
         setNotes(response);
@@ -39,7 +41,7 @@ export const NotesProvider = ({ children }) => {
       body: `{"title":"${title}","description":"${description}","tag":"${tag}"}`,
     };
 
-    await fetch("http://localhost:5000/api/notes/add-note", options)
+    await fetch(`${baseAPIUrl}/api/notes/add-note`, options)
       .then((response) => response.json())
       .then((response) => {
         showAlert("success", `NEW NOTE CREATED`);
@@ -59,7 +61,7 @@ export const NotesProvider = ({ children }) => {
       },
     };
 
-    await fetch(`http://localhost:5000/api/notes/delete/${id}`, options)
+    await fetch(`${baseAPIUrl}/api/notes/delete/${id}`, options)
       .then((response) => response.json())
       .then((response) => {
         showAlert("success", `NOTE DELETED`);
@@ -83,7 +85,7 @@ export const NotesProvider = ({ children }) => {
       body: `{"title":"${title}","description":"${description}","tag":"${tag}"}`,
     };
 
-    await fetch(`http://localhost:5000/api/notes/update/${id}`, options)
+    await fetch(`${baseAPIUrl}/api/notes/update/${id}`, options)
       .then((response) => response.json())
       .then((response) => {
         showAlert("success", `NOTE UPDATED`);

@@ -8,6 +8,8 @@ import { AlertContext } from "./AlertContext";
 export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
+  const baseAPIUrl = "https://inotebookapi-9vwo.onrender.com";
+
   const { showAlert } = useContext(AlertContext);
   let navigate = useNavigate();
 
@@ -22,7 +24,7 @@ export const UserProvider = ({ children }) => {
       body: `{"email":"${email}","password":"${password}"}`,
     };
 
-    await fetch("http://localhost:5000/api/auth/login", options)
+    await fetch(`${baseAPIUrl}/api/auth/login`, options)
       .then((response) => response.json())
       .then((response) => {
         //
@@ -50,7 +52,7 @@ export const UserProvider = ({ children }) => {
       body: `{"name":"${name}","email":"${email}","password":"${password}"}`,
     };
 
-    await fetch("http://localhost:5000/api/auth/new-user", options)
+    await fetch(`${baseAPIUrl}/api/auth/new-user`, options)
       .then((response) => response.json())
       .then((response) => {
         if (response.success) {

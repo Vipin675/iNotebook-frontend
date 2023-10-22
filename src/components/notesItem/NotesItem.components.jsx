@@ -32,13 +32,13 @@ const NotesItem = ({ note }) => {
   return (
     <>
       <div
-        className={`modal ${modal ? "bg-blur" : ""} `}
+        className={`modal ${modal ? "bg-dark bg-opacity-75" : ""} `}
         style={{ display: `${modal ? "block" : ""}` }}
         tabIndex="-1"
       >
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
-            <div className="modal-header text-light bg-dark">
+            <div className="modal-header text-light bg-info">
               <h5 className="modal-title">Update {note.title} note</h5>
               <button
                 type="button"
@@ -113,11 +113,17 @@ const NotesItem = ({ note }) => {
       </div>
       <div className="col-md-4">
         <div className="card my-3">
-          <div className="card-body">
+          <div
+            className="card-body"
+            style={{
+              boxShadow:
+                "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+            }}
+          >
             <div className="card-title d-flex align-item-center justify-content-between">
               <h5>{note.title}</h5>
               <div>
-                <i className="mx-1 badge rounded-pill text-bg-primary">
+                {/* <i className="mx-1 badge rounded-full text-bg-primary">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -129,9 +135,9 @@ const NotesItem = ({ note }) => {
                     <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
                     <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
                   </svg>
-                </i>
+                </i> */}
                 <i
-                  className="mx-1 badge rounded-pill text-bg-success"
+                  className="mx-1 badge rounded-full text-bg-success"
                   onClick={handleShow}
                 >
                   <svg
@@ -146,7 +152,7 @@ const NotesItem = ({ note }) => {
                   </svg>
                 </i>
                 <i
-                  className="mx-1 badge rounded-pill text-bg-danger"
+                  className="mx-1 badge rounded-full text-bg-danger"
                   onClick={() => handlDeleteClick(note._id)}
                 >
                   <svg
@@ -164,7 +170,9 @@ const NotesItem = ({ note }) => {
             </div>
             <p className="card-text">{note.description}</p>
           </div>
-          <div className="card-footer">tag used: {note.tag}</div>
+          <div className="card-footer">
+            tag used: <span className="badge text-bg-info">{note.tag}</span>{" "}
+          </div>
         </div>
       </div>
     </>

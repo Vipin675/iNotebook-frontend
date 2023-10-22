@@ -4,7 +4,10 @@ const Alert = (props) => {
   return (
     <>
       {props.alert && (
-        <div className={`alert alert-${props.alert.type}`} role="alert">
+        <div
+          className={`container alert alert-${props.alert.type}`}
+          role="alert"
+        >
           <strong>
             {props.alert.type}: {props.alert.message}
           </strong>

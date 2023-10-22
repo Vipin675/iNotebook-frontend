@@ -15,7 +15,7 @@ const Navigation = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="container my-md-2 my-lg-2 navbar navbar-expand-lg navbar-dark bg-dark rounded">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
             iNotebook

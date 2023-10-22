@@ -7,9 +7,6 @@ const Home = () => {
     <>
       <div>
         <AddNote />
-        <div className="container">
-          <hr className="border border-dark border-3 opacity-75" />
-        </div>
         <Notes />
       </div>
     </>
