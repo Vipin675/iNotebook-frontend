@@ -17,8 +17,9 @@ const Navigation = () => {
     <>
       <nav className="container my-md-2 my-lg-2 navbar navbar-expand-lg navbar-dark bg-dark rounded">
         <div className="container-fluid">
+          {/* <img style={{ height: "1.5rem" }} src="notexpress.png" alt="" /> */}
           <Link className="navbar-brand" to="/">
-            iNotebook
+            NoteXpress
           </Link>
           <button
             className="navbar-toggler"

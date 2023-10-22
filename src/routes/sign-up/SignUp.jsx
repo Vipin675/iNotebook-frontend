@@ -43,11 +43,14 @@ const SignUp = () => {
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
                     <form onSubmit={handleSubmit}>
-                      {/* <img src="../../assets/logo/inotebook.png" alt="logo" /> */}
                       <div className="d-flex align-items-center mb-3 pb-1">
-                        <span className="h1 fw-bold mb-0">iNoteBook</span>
+                        <img
+                          style={{ height: "5rem" }}
+                          src="notexpress.png"
+                          alt=""
+                        />
+                        <span className="h1 fw-bold mb-0">NoteXpress</span>
                       </div>
-                      <h1 className="h3 mb-3 fw-normal">Register</h1>
 
                       <div className="form-floating mb-2">
                         <input

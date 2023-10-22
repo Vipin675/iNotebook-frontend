@@ -18,20 +18,25 @@ const About = () => {
             <div className="col-12 col-lg-6 col-xl-7">
               <div className="row justify-content-xl-center">
                 <div className="col-12 col-xl-11">
-                  <h2 className="h1 mb-3">
-                    {/* iNoteBook - Your Personal Note-Taking App */}
-                    About
-                  </h2>
+                  <div className="mb-3 d-flex flex-column justify-content-start align-items-center">
+                    <img
+                      style={{ height: "3rem" }}
+                      src="notexpress.png"
+                      alt=""
+                    />
+                    <h2 className="h2">NoteXpress</h2>
+                  </div>
+                  <h3 className="mb-3">- Your Personal Note-Taking App -</h3>
                   <p className="mb-5">
-                    iNoteBook is a powerful MERN (MongoDB, Express.js, React,
+                    NoteXpress is a powerful MERN (MongoDB, Express.js, React,
                     and Node.js) application designed to simplify the process of
                     managing your notes. Whether you're a student, professional,
                     or anyone in need of an organized digital notebook,
-                    iNoteBook offers a comprehensive solution with features like
-                    user authentication, registration, and full CRUD (Create,
-                    Read, Update, Delete) operations for each note.
+                    NoteXpress offers a comprehensive solution with features
+                    like user authentication, registration, and full CRUD
+                    (Create, Read, Update, Delete) operations for each note.
                   </p>
-                  <div className="row gy-4 gy-md-0 gx-xxl-5X">
+                  {/* <div className="row gy-4 gy-md-0 gx-xxl-5X">
                     <div className="col-12 col-md-6">
                       <div className="d-flex">
                         <div className="me-4 text-primary">
@@ -78,7 +83,7 @@ const About = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
