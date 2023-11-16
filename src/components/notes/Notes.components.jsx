@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NotesContext } from "../../context/NotesContext";
@@ -17,6 +17,20 @@ const Notes = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const [selectedVisibility, setSelectedVisibility] = useState("all");
+
+  const handleVisibilityChange = (e) => {
+    setSelectedVisibility(e.target.value);
+  };
+
+  const filteredNotes = notes.filter((note) => {
+    if (selectedVisibility === "all") {
+      return true;
+    } else {
+      return note.visibility === selectedVisibility;
+    }
+  });
+
   return (
     <>
       <div
@@ -28,12 +42,31 @@ const Notes = () => {
       >
         <div className="row my-3">
           <h2 className="text-center">YOUR NOTES</h2>
-          {notes.length !== 0 ? (
-            notes.map((note) => {
+
+          {/* Visibility Filter Select Input */}
+          <div className="mb-3">
+            <label htmlFor="visibilityFilter" className="form-label">
+              Filter by Visibility:
+            </label>
+            <select
+              className="form-control"
+              id="visibilityFilter"
+              value={selectedVisibility}
+              onChange={handleVisibilityChange}
+            >
+              <option value="all">All</option>
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+              <option value="shared">Shared</option>
+            </select>
+          </div>
+
+          {filteredNotes.length !== 0 ? (
+            filteredNotes.map((note) => {
               return <NotesItem key={note._id} note={note} />;
             })
           ) : (
-            <div className="container">There is nothing to see !</div>
+            <div className="container">There is nothing to see!</div>
           )}
         </div>
       </div>
