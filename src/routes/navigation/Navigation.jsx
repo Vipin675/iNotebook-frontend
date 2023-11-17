@@ -37,6 +37,17 @@ const Navigation = () => {
               <li className="nav-item">
                 <Link
                   className={`nav-link ${
+                    location.pathname === "/global" ? "active" : ""
+                  }`}
+                  aria-current="page"
+                  to="/global"
+                >
+                  Global
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className={`nav-link ${
                     location.pathname === "/" ? "active" : ""
                   }`}
                   aria-current="page"

@@ -8,6 +8,8 @@ const AddNote = () => {
     title: "",
     description: "",
     tag: "",
+    visibility: "public", // Default to 'public'
+    selectedUser: "", // Selected user for shared notes
   });
 
   const handleChange = (e) => {
@@ -16,11 +18,14 @@ const AddNote = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(newNote);
     addNote(newNote);
     setNewNote({
       title: "",
       description: "",
       tag: "",
+      visibility: "public",
+      selectedUser: "",
     });
   };
 
@@ -79,6 +84,37 @@ const AddNote = () => {
             value={newNote.tag}
           />
         </div>
+        <div className="mb-3">
+          <label htmlFor="visibility" className="form-label">
+            <h5>Visibility</h5>
+          </label>
+          <select
+            className="form-control border-success"
+            id="visibility"
+            name="visibility"
+            onChange={handleChange}
+            value={newNote.visibility}
+          >
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+            <option value="shared">Shared</option>
+          </select>
+        </div>
+        {newNote.visibility === "shared" && (
+          <div className="mb-3">
+            <label htmlFor="selectedUser" className="form-label">
+              <h5>Select User</h5>
+            </label>
+            <input
+              type="text"
+              className="form-control border-success"
+              id="selectedUser"
+              name="selectedUser"
+              onChange={handleChange}
+              value={newNote.selectedUser}
+            />
+          </div>
+        )}
         <button
           disabled={newNote.title.length < 4 || newNote.description.length < 6}
           type="submit"
