@@ -7,15 +7,16 @@ import { AlertContext } from "./AlertContext";
 export const NotesContext = createContext();
 
 export const NotesProvider = ({ children }) => {
-  const baseAPIUrl = "https://inotebookapi-9vwo.onrender.com";
-  // const baseAPIUrl = "http://localhost:5000";
-
+  const baseAPIUrl = process.env.REACT_APP_API_BASE_URL;
   const { showAlert } = useContext(AlertContext);
+
+  const [loading, setLoading] = useState(false);
   const [notes, setNotes] = useState([]);
   const [noteDetails, setNoteDetails] = useState({});
 
   // GET GLOBAL PUBLIC NOTES
   const getGlobalPublicNotes = async () => {
+    setLoading(true);
     const options = {
       method: "GET",
       headers: {
@@ -27,12 +28,15 @@ export const NotesProvider = ({ children }) => {
       .then((response) => response.json())
       .then((response) => {
         setNotes(response);
+        setLoading(false);
       })
       .catch((err) => console.error(err));
+    setLoading(false);
   };
 
   // GET ALL NOTES
   const getAllNotes = async () => {
+    setLoading(true);
     const options = {
       method: "GET",
       headers: {
@@ -44,12 +48,17 @@ export const NotesProvider = ({ children }) => {
       .then((response) => response.json())
       .then((response) => {
         setNotes(response);
+        setLoading(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
   };
 
   // GET NOTE DETAILS
   const getNoteDetails = async (noteId) => {
+    setLoading(true);
     const options = {
       method: "GET",
       headers: {
@@ -61,12 +70,17 @@ export const NotesProvider = ({ children }) => {
       .then((response) => response.json())
       .then((response) => {
         setNoteDetails(response);
+        setLoading(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
   };
 
   // ADD NEW NOTE
   const addNote = async (newNote) => {
+    setLoading(true);
     const { title, description, tag, visibility, selectedUser } = newNote;
     let selectedUsersArray = [];
     if (visibility === "shared") {
@@ -87,15 +101,17 @@ export const NotesProvider = ({ children }) => {
       }),
     };
 
-    console.log(options);
-
     await fetch(`${baseAPIUrl}/api/notes/add-note`, options)
       .then((response) => response.json())
       .then((response) => {
         showAlert("success", `NEW NOTE CREATED`);
         console.log(response);
+        setLoading(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
 
     getAllNotes();
   };
@@ -122,7 +138,7 @@ export const NotesProvider = ({ children }) => {
 
   // UPDATE NOTE
   const updateNote = async (id, note) => {
-    console.log("update api called", note, "id : ", id);
+    setLoading(true);
     const { title, description, tag, visibility, selectedUser } = note;
     let selectedUsersArray = [];
     if (visibility === "shared") {
@@ -148,8 +164,12 @@ export const NotesProvider = ({ children }) => {
       .then((response) => {
         showAlert("success", `NOTE UPDATED`);
         console.log(response);
+        setLoading(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
 
     getAllNotes();
   };
@@ -159,6 +179,7 @@ export const NotesProvider = ({ children }) => {
       value={{
         notes,
         noteDetails,
+        loading,
         getAllNotes,
         addNote,
         deleteNote,

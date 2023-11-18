@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 
 const NotesItem = ({ note }) => {
   const location = useLocation();
-  const { deleteNote, updateNote } = useContext(NotesContext);
+  const { loading, deleteNote, updateNote } = useContext(NotesContext);
   const [newUpdateNote, setNewUpdateNote] = useState({
     title: note.title,
     description: note.description,
@@ -137,7 +137,7 @@ const NotesItem = ({ note }) => {
                     className="btn btn-primary"
                     onClick={handleSubmit}
                   >
-                    Update
+                    {loading ? "loading..." : <>Update</>}
                   </button>
                 </div>
               </form>

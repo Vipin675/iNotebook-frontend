@@ -10,7 +10,7 @@ const SignUp = () => {
     }
   });
 
-  const { signUpUser } = useContext(UserContext);
+  const { loading, signUpUser } = useContext(UserContext);
   const [newUser, setnewUser] = useState({
     name: "",
     email: "",
@@ -111,7 +111,7 @@ const SignUp = () => {
                         className="w-100 btn btn-lg btn-primary"
                         type="submit"
                       >
-                        Sign Up
+                        {loading ? "loading..." : <>Sign Up</>}
                       </button>
                       <p className="mt-4 mb-1 text-muted">
                         Already have an account? <Link to="/login">login</Link>

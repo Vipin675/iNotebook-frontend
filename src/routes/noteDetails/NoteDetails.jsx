@@ -6,11 +6,11 @@ import { NotesContext } from "../../context/NotesContext";
 const NoteDetails = () => {
   const location = useLocation();
   const noteId = location.pathname.split("/")[2];
-  const { noteDetails, getNoteDetails } = useContext(NotesContext);
+  const { loading, noteDetails, getNoteDetails } = useContext(NotesContext);
 
   useEffect(() => {
     getNoteDetails(noteId);
-  });
+  }, []);
 
   return (
     <>
@@ -21,20 +21,26 @@ const NoteDetails = () => {
             "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
         }}
       >
-        <h2>{noteDetails.note?.title}</h2>
-        <p>{noteDetails.note?.description}</p>
-        <strong>{noteDetails?.createrName}</strong> ||
-        <strong>{" " + noteDetails?.createrEmail}</strong>
-        {noteDetails.note?.sharedWith.length !== 0 && (
+        {loading ? (
+          "loading...."
+        ) : (
           <>
-            <div className="mt-3">
-              <h3>Shared With : </h3>
-              {noteDetails.note?.sharedWith.map((su, key) => (
-                <div key={key}>
-                  <span>{su}</span> <br />
+            <h2>{noteDetails.note?.title}</h2>
+            <p>{noteDetails.note?.description}</p>
+            <strong>{noteDetails?.createrName}</strong> ||
+            <strong>{" " + noteDetails?.createrEmail}</strong>
+            {noteDetails.note?.sharedWith.length !== 0 && (
+              <>
+                <div className="mt-3">
+                  <h3>Shared With : </h3>
+                  {noteDetails.note?.sharedWith.map((su, key) => (
+                    <div key={key}>
+                      <span>{su}</span> <br />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </>
+            )}
           </>
         )}
       </div>

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { NotesContext } from "../../context/NotesContext";
 
 const AddNote = () => {
-  const { addNote } = useContext(NotesContext);
+  const { loading, addNote } = useContext(NotesContext);
 
   const [newNote, setNewNote] = useState({
     title: "",
@@ -18,7 +18,6 @@ const AddNote = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newNote);
     addNote(newNote);
     setNewNote({
       title: "",
@@ -121,7 +120,7 @@ const AddNote = () => {
           className="btn btn-primary"
           onClick={handleSubmit}
         >
-          Add notes
+          {loading ? "loading..." : <>Add notes</>}
         </button>
       </form>
     </div>
