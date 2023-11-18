@@ -34,12 +34,12 @@ export const UserProvider = ({ children }) => {
         if (response.success) {
           // SAVE THE AUTH TOKEN OF THE USER AND REDIRECT
           localStorage.setItem("token", response.authToken);
+          setLoading(false);
           navigate("/");
           showAlert("success", response.message);
-          setLoading(false);
         } else {
-          showAlert("danger", "Invalid email or password");
           setLoading(false);
+          showAlert("danger", "Invalid email or password");
         }
         //
       })
@@ -63,12 +63,12 @@ export const UserProvider = ({ children }) => {
       .then((response) => {
         if (response.success) {
           localStorage.setItem("token", response.authToken);
+          setLoading(false);
           showAlert("success", response.message);
           navigate("/");
-          setLoading(false);
         } else {
-          showAlert("success", "Some of the you entered field is invalid");
           setLoading(false);
+          showAlert("success", "Some of the you entered field is invalid");
         }
         console.log(response);
       })
