@@ -7,8 +7,8 @@ import { AlertContext } from "./AlertContext";
 export const NotesContext = createContext();
 
 export const NotesProvider = ({ children }) => {
-  // const baseAPIUrl = "https://inotebookapi-9vwo.onrender.com";
-  const baseAPIUrl = "http://localhost:5000";
+  const baseAPIUrl = "https://inotebookapi-9vwo.onrender.com";
+  // const baseAPIUrl = "http://localhost:5000";
 
   const { showAlert } = useContext(AlertContext);
   const [notes, setNotes] = useState([]);

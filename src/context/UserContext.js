@@ -8,8 +8,8 @@ import { AlertContext } from "./AlertContext";
 export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
-  // const baseAPIUrl = "https://inotebookapi-9vwo.onrender.com";
-  const baseAPIUrl = "http://localhost:5000";
+  const baseAPIUrl = "https://inotebookapi-9vwo.onrender.com";
+  // const baseAPIUrl = "http://localhost:5000";
 
   const { showAlert } = useContext(AlertContext);
   let navigate = useNavigate();
