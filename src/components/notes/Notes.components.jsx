@@ -6,7 +6,7 @@ import NotesItem from "../notesItem/NotesItem.components";
 
 const Notes = () => {
   const navigate = useNavigate();
-  const { notes, getAllNotes } = useContext(NotesContext);
+  const { loading, notes, getAllNotes } = useContext(NotesContext);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -61,7 +61,9 @@ const Notes = () => {
             </select>
           </div>
 
-          {filteredNotes.length !== 0 ? (
+          {loading ? (
+            "loading"
+          ) : filteredNotes.length !== 0 ? (
             filteredNotes.map((note) => {
               return <NotesItem key={note._id} note={note} />;
             })

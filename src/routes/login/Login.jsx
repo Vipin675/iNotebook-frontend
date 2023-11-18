@@ -11,7 +11,7 @@ const Login = () => {
     }
   });
 
-  const { loginUser } = useContext(UserContext);
+  const { loading, loginUser } = useContext(UserContext);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -81,7 +81,7 @@ const Login = () => {
                         className="w-100 btn btn-lg btn-primary"
                         type="submit"
                       >
-                        Login
+                        {loading ? "loading..." : <>Login</>}
                       </button>
                       <p className="mt-4 mb-1 text-muted">
                         Don't have an account ?{" "}

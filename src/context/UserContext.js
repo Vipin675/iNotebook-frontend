@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Alert Context -----------------------
@@ -8,14 +8,16 @@ import { AlertContext } from "./AlertContext";
 export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
-  const baseAPIUrl = "https://inotebookapi-9vwo.onrender.com";
-  // const baseAPIUrl = "http://localhost:5000";
+  const baseAPIUrl = process.env.REACT_APP_API_BASE_URL;
+
+  const [loading, setLoading] = useState(false);
 
   const { showAlert } = useContext(AlertContext);
   let navigate = useNavigate();
 
   // LOGIN USER
   const loginUser = async (user) => {
+    setLoading(true);
     const { email, password } = user;
     const options = {
       headers: {
@@ -34,8 +36,10 @@ export const UserProvider = ({ children }) => {
           localStorage.setItem("token", response.authToken);
           navigate("/");
           showAlert("success", response.message);
+          setLoading(false);
         } else {
           showAlert("danger", "Invalid email or password");
+          setLoading(false);
         }
         //
       })
@@ -44,6 +48,7 @@ export const UserProvider = ({ children }) => {
 
   //   SIGN-UP USER
   const signUpUser = async (user) => {
+    setLoading(true);
     const { name, email, password } = user;
     const options = {
       headers: {
@@ -60,8 +65,10 @@ export const UserProvider = ({ children }) => {
           localStorage.setItem("token", response.authToken);
           showAlert("success", response.message);
           navigate("/");
+          setLoading(false);
         } else {
           showAlert("success", "Some of the you entered field is invalid");
+          setLoading(false);
         }
         console.log(response);
       })
@@ -69,7 +76,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ loginUser, signUpUser }}>
+    <UserContext.Provider value={{ loading, loginUser, signUpUser }}>
       {children}
     </UserContext.Provider>
   );
