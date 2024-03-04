@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 
+import { Analytics } from "@vercel/analytics/react";
+
 import { BrowserRouter } from "react-router-dom";
 import { NotesProvider } from "./context/NotesContext";
 import { UserProvider } from "./context/UserContext";
@@ -15,6 +17,7 @@ root.render(
       <UserProvider>
         <NotesProvider>
           <App />
+          <Analytics />
         </NotesProvider>
       </UserProvider>
     </AlertProvider>
